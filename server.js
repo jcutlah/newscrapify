@@ -5,25 +5,22 @@ const exphbs = require('express-handlebars');
 const path = require('path');
 const logger = require("morgan");
 const mongoose = require("mongoose");
-const axios = require("axios");
-const cheerio = require("cheerio");
 const app = express();
 const PORT = process.env.PORT || 3000;
 const mongoUri = process.env.MONGODB_URI || "mongodb://localhost/newscrapify";
-app.engine("handlebars", exphbs({ defaultLayout: "main" }));
-app.set("view engine", "handlebars");
-// Use morgan logger for logging requests
-app.use(logger("dev"));
-// Parse request body as JSON
-app.use(express.urlencoded({ extended: true }));
-app.use(express.json());
-
-require('./routes/htmlRoutes.js')(app);
-
-// Connect to the Mongo DB
 mongoose.connect(mongoUri, { useNewUrlParser: true });
 
+app.engine("handlebars", exphbs({ defaultLayout: "main" }));
+app.set("view engine", "handlebars");
+app.use(logger("dev"));
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
 app.use(express.static(path.join(__dirname, 'public')));
+
+require('./routes/htmlRoutes.js')(app);
+require('./routes/apiRoutes.js')(app);
+
+
 
 app.listen(PORT, function() {
     console.log("App running on port " + PORT + "!");
