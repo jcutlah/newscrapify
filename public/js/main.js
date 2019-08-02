@@ -18,7 +18,7 @@
         // $(target).empty();
         array.forEach((article) => {
             console.log(article);
-            let card = $('<div>').addClass("card");
+            let card = $('<div>').addClass("card").attr('data-category',article.category);
             let cardInner = $('<div>').addClass('card-inner');
             let cardBottom = $('<div>').addClass('card-bottom');
             let img = $('<img>').addClass("card-img-top img-thumbnail").attr('src',article.image);
