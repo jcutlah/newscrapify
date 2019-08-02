@@ -1,9 +1,14 @@
-<div id="main">
-    <ul>
-        {{#each list}}
-            <li>
-                {{this}}
-            </li>
+<div class="container" id="main">
+    <div class="row">
+        {{#each results}}
+            <div class="card">
+                <img src="{{image}}" class="card-img-top img-thumbnail" alt="">
+                <h2 href="{{link}}" class="text-center lh-title">{{title}}</h2>
+                <p class="text-center">{{category}}</p>
+                <div class="favorite" title="Add to favorites list">
+                    <i class="far fa-plus-square"></i>
+                </div>
+            </div>
         {{/each}}
-    </ul>
+    </div>
 </div>

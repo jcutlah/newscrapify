@@ -1,20 +1,34 @@
-var mongoose = require("mongoose");
-var Schema = mongoose.Schema;
-var ArticleSchema = new Schema({
+const mongoose = require("mongoose");
+
+const Schema = mongoose.Schema;
+const ArticleSchema = new Schema({
   title: {
     type: String,
-    required: true
+    required: true,
+    unique: true
   },
   link: {
     type: String,
     required: true
   },
+  category: {
+    type: String,
+    required: true,
+    default: "Uncategorized"
+  },
+  image: {
+      type: String,
+      required: true,
+      default: "./images/HubSpot.jpg"
+  },
   note: {
     type: Schema.Types.ObjectId,
     ref: "Note"
+  }, 
+  isFavorite: {
+      type: Schema.Types.Boolean
   }
 });
-
 // This creates our model from the above schema, using mongoose's model method
 var Article = mongoose.model("Article", ArticleSchema);
 
