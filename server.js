@@ -9,6 +9,9 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 const mongoUri = process.env.MONGODB_URI || "mongodb://localhost/newscrapify";
 mongoose.connect(mongoUri, { useNewUrlParser: true });
+mongoose.connection.collections['articles'].drop( function(err) {
+    console.log('collection dropped');
+});
 
 app.engine("handlebars", exphbs({ defaultLayout: "main" }));
 app.set("view engine", "handlebars");

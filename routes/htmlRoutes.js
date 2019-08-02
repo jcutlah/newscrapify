@@ -1,7 +1,12 @@
 const app = require('express');
+const db = require('../models/index');
 
 module.exports = function(app){
     app.get('/',function(req,res){
-        res.render('index',{title: "Newsify", list: ["one","two","three"]});
+        db.Article.find({}, (err, results) => {
+            if (err) throw err;
+            console.log(results);
+            res.render('index',{title: "Newsify", results});
+        });
     });
 };
