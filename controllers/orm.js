@@ -5,7 +5,7 @@ const orm = {
     // get all burgers
     allArticles: function(callback){
         console.log('running allArticles()');
-        db.Article.find({}, (err, results) => {
+        db.Article.find().sort({_id:-1}).exec((err, results) => {
             if (err) throw err;
             console.log(results);
             callback(results);
