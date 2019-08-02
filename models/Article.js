@@ -19,7 +19,7 @@ const ArticleSchema = new Schema({
   image: {
       type: String,
       required: true,
-      default: "./images/HubSpot.jpg"
+      default: "./images/Hubspot.jpg"
   },
   note: {
     type: Schema.Types.ObjectId,
