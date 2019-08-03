@@ -21,12 +21,14 @@ const ArticleSchema = new Schema({
       required: true,
       default: "./images/Hubspot.jpg"
   },
-  note: {
+  notes: [{
     type: Schema.Types.ObjectId,
     ref: "Note"
-  }, 
+  }], 
   isFavorite: {
-      type: Schema.Types.Boolean
+      type: Schema.Types.Boolean,
+      required: true,
+      default: false
   }
 });
 // This creates our model from the above schema, using mongoose's model method

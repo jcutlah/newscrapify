@@ -17,19 +17,24 @@ h1 {
   .card-bottom {
       height: 40px;
   }
-  .favorite {
+  .favorite, .add-comment {
     position: absolute;
     top: 10px;
-    right: 10px;
     opacity: 0;
     transition: opacity 0.5s ease;
+  }
+  .favorite {
+      right: 10px;
+  }
+  .add-comment {
+      left: 10px;
   }
   #lighthouses .card:hover .favorite,
 #lighthouse-wrapper:hover .slick-arrow,
 #fav-list:hover .slick-arrow {
   opacity: 1;
 }
-.card .favorite:hover {
+.card .favorite:hover, .card .add-comment:hover {
     cursor: pointer;
   }
   .card .favorite i {
@@ -48,10 +53,16 @@ h1 {
     margin-left: auto;
     margin-right: auto;
   }
-  .card:hover .favorite {
+  .card:hover .favorite, .card:hover .add-comment {
       opacity: 1;
   }
   .articles {
       display: flex;
       flex-wrap: wrap;
+  }
+  .modal-backdrop {
+      background-color: rgba(0,0,0,.3);
+  }
+  .modal-footer form {
+      width: 100%;
   }

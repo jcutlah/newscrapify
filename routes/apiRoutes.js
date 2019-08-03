@@ -1,6 +1,7 @@
 const axios = require("axios");
 const cheerio = require("cheerio");
 const db = require('../models/index');
+const orm = require('../controllers/orm');
 
 
 
@@ -57,6 +58,27 @@ module.exports = app => {
             });
             // console.log(list);
             // console.log('sending to page');
+        })
+    });
+    app.get('/api/favorites', (req,res) => {
+        orm.getFavorites(function(favorites){
+            console.log(favorites);
+            res.send(favorites);
+        })
+    });
+    app.put('/api/favorite/:id',(req,res) => {
+        const id = req.params.id;
+        orm.makeFavorite(id,function(article){
+            console.log(article);
+            res.send(article);
+        })
+    });
+    app.post('/api/comments/:id',(req,res) => {
+        console.log(`"Comment received with body: ${req.body.message}"`);
+        const id = req.params.id;
+        orm.addNote({id,message:req.body},function(response){
+            console.log(response);
+            res.send(response);
         })
     })
 }

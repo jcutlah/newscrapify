@@ -10,7 +10,10 @@ const PORT = process.env.PORT || 3000;
 const mongoUri = process.env.MONGODB_URI || "mongodb://localhost/newscrapify";
 mongoose.connect(mongoUri, { useNewUrlParser: true });
 mongoose.connection.collections['articles'].drop( function(err) {
-    console.log('collection dropped');
+    console.log('articles dropped');
+});
+mongoose.connection.collections['notes'].drop( function(err) {
+    console.log('notes dropped');
 });
 
 app.engine("handlebars", exphbs({ defaultLayout: "main" }));
