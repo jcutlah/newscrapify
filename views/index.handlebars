@@ -1,26 +1,32 @@
 <div class="container-fluid" id="main">
     <div class="row justify-content-center">
-        <div class="col col-md-9 articles">
-            {{#each articles}}
-                <div class="card" data-category="{{category}}">
-                    <div class="card-inner">
-                        <img src="{{image}}" class="card-img-top img-thumbnail" alt="">
-                        <h2 href="{{link}}" class="text-center lh-title">{{title}}</h2>
+        <div class="col col-md-9">
+            <h2>Articles</h2>
+            <div class="articles">
+                {{#each articles}}
+                    <div class="card" data-category="{{category}}">
+                        <div class="card-inner">
+                            <img src="{{image}}" class="card-img-top img-thumbnail" alt="">
+                            <h2 href="{{link}}" class="text-center lh-title">{{title}}</h2>
+                        </div>
+                        <div class="card-bottom">
+                            <p class="text-center">Category: {{category}}</p>
+                        </div>
+                        <div class="favorite" data-id="{{_id}}" title="Add to favorites list">
+                            <i class="far fa-plus-square"></i>
+                        </div>
+                        <div class="add-comment" data-id="{{_id}}" title="Comment on this post" data-toggle="modal" data-target="#comments">
+                            <i class="fas fa-quote-right"></i>
+                        </div>
                     </div>
-                    <div class="card-bottom">
-                        <p class="text-center">Category: {{category}}</p>
-                    </div>
-                    <div class="favorite" data-id="{{_id}}" title="Add to favorites list">
-                        <i class="far fa-plus-square"></i>
-                    </div>
-                    <div class="add-comment" data-id="{{_id}}" title="Comment on this post" data-toggle="modal" data-target="#comments">
-                        <i class="fas fa-quote-right"></i>
-                    </div>
-                </div>
-            {{/each}}
+                {{/each}}
+            </div>
         </div>
-        <div class="col col-md-3" id="favorites">
-            
+        <div class="col col-md-3">
+            <h2>Favorites</h2>
+            <div id="favorites">
+
+            </div>
         </div>
         <div id="comments" class="modal" tabindex="-1" role="dialog">
             <div class="modal-dialog" role="document">
@@ -36,13 +42,13 @@
                     <div class="modal-body">
                         <p>Comments</p>
                         <div id="comment-wrapper">
-
+                            <ul id="comments-list"></ul>
                         </div>
                     </div>
                     <div class="modal-footer">
                         <form>
                             <div class="form-group">
-                                <label for="exampleInputPassword1">Add Comment</label>
+                                <label for="add-comment">Add Comment</label>
                                 <textarea rows="3" class="form-control" id="add-comment" placeholder="Add your comment here..."></textarea>
                             </div>
                             <button type="submit" class="btn btn-primary">Submit Comment</button>

@@ -35,6 +35,15 @@ const orm = {
         }).catch(err => {
             callback(err);
         });
+    },
+    getPost: function(id, callback) {
+        console.log(`getting post with id ${id}` );
+        db.Article.find({_id:id}).populate('notes').then((post) => {
+            console.log(post);
+            callback(post);
+        }).catch((err) => {
+            console.log(err);
+        });
     }
 }
 
