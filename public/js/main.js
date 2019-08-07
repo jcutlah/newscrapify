@@ -7,6 +7,7 @@
             // console.log(response);
             if (response === "No more articles to scrape"){
                 // throwModal();
+                alert('No more articles to scrape for this topic. Try another topic or come back later. HubSpot blogs frequently so there should be more posts soon!');
                 console.log(response);
             } else {
                 displayPosts(response, "#main .articles");
