@@ -76,8 +76,17 @@ module.exports = app => {
     app.post('/api/comments/:id',(req,res) => {
         console.log(`"Comment received with body: ${req.body.message}"`);
         const id = req.params.id;
-        orm.addNote({id,message:req.body},function(response){
+        orm.addNote({id:id,message:req.body},function(response){
             console.log(response);
+            res.send(response);
+        })
+    });
+    app.get('/api/comments/:id',(req,res) => {
+        console.log('Request received for post comments');
+        const id = req.params.id;
+        console.log(`Post id = ${id}`);
+        orm.getPost(id,function(response){
+            console.log(`Response from /api/comments/:id -> ${JSON.stringify(response)}`);
             res.send(response);
         })
     })

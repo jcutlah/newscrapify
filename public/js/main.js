@@ -47,16 +47,41 @@
             displayPosts(response,"#favorites");
         })
     }
-    const getPostComments = () => {
-
+    const displayComments = (post) => {
+        let comments = $('#comment-wrapper');
+        console.log(post.notes);
+        $('#post-title').text(post.title);
+        post.notes.length > 0 ?
+        post.notes.forEach(note => {
+            console.log(note);
+            let comment = $(`<li>`).attr('class','comment').text(note.comment);
+            let timestamp = $('<div>').attr('class','timestamp').html(`<small>${note.createdAt}</small>`);
+            $('#comments-list').append(comment.append(timestamp));
+        }) :
+        $('#comments-list').append($('<li>').text("No comments to show for this post"));
+    }
+    const getPostComments = (id) => {
+        console.log(`running getPostComments() for post with id ${id}`);
+        $.ajax({
+            url: `/api/comments/${id}`,
+            type: "GET"
+        }).then(function(response){
+            let commentsList = $('#comments-list');
+            commentsList.empty();
+            console.log(response);
+            displayComments(response[0]);
+        })
     }
     const submitComment = (comment) => {
+        console.log('submittin comment');
         $.ajax({
             type: "POST",
             url: `api/comments/${comment.id}`,
             data: {message: comment.comment}
         }).then(function(response){
             console.log(response);
+            $('#add-comment').val('');
+            getPostComments(comment.id);
         })
     }
     $('.scraper').on('click',function(e){
@@ -81,7 +106,7 @@
         console.log('add comment clicked');
         let id = $(this).attr('data-id');
         $('#comments').attr('data-id',id);
-        // getPostComments(id);
+        getPostComments(id);
 
     });
     $('#comments form').on('submit',function(e){
@@ -89,6 +114,7 @@
         let id = $('#comments').attr('data-id');
         let message = $('#add-comment').val();
         console.log(message);
+        console.log(id);
         submitComment({id,comment:message});
     });
     
